@@ -16,28 +16,22 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 refs.loadMoreBtn.classList.add('is-hiden');
 
-function onSearch(event) {
+async function onSearch(event) {
     event.preventDefault();
 
     clearImagesContainer();
     imagesApiService.query = event.currentTarget.elements.searchQuery.value;
     imagesApiService.resetPage();
-    imagesApiService.fetchImages().then(data => {
-        if (data.length === 0) {
-            clearImagesContainer();
-            onEmptyArray();            
-            return;
-         };
-        renderImagesList(data);
-        refs.loadMoreBtn.classList.remove('is-hiden');
-    });    
-    
+
+    const data = await imagesApiService.fetchImages();
+    return await imagesOnSearch(data);
  };
 
-function onLoadMore(event) {
+async function onLoadMore(event) {
     event.preventDefault();
 
-imagesApiService.fetchImages().then(renderImagesList);
+    const images = await imagesApiService.fetchImages();
+    return await renderImagesList(images);
      
 };
 
@@ -74,4 +68,16 @@ function clearImagesContainer() {
  
 function onEmptyArray() {
    Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.'); 
- }
+};
+
+function imagesOnSearch(data) {
+    console.log(data);
+            if (data.length === 0) {
+            clearImagesContainer();
+            onEmptyArray();            
+            return;
+         };
+        renderImagesList(data);
+        refs.loadMoreBtn.classList.remove('is-hiden');    
+ };
+ 
