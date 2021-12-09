@@ -4,7 +4,7 @@ export default class ImagesApiService{
     constructor() {
         this.searchQuery = '';
         this.page = 1;
-        this.perPage = 40;
+        this.perPage = 200;
         
     }
     
@@ -19,14 +19,7 @@ export default class ImagesApiService{
         return images;        
     }
 
-    resetPage() {
-        this.page = 1;
-    }
-
-   
-    set query(newQuery) {
-        this.searchQuery = newQuery;
-    }
+    
 
     hitsOfImages(data) {
         
@@ -37,6 +30,15 @@ export default class ImagesApiService{
         
                 this.page += 1;                
                 return data.hits;
+    }
+
+    resetPage() {
+        this.page = 1;
+    }
+
+   
+    set query(newQuery) {
+        this.searchQuery = newQuery;
     }
 
   

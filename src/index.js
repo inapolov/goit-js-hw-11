@@ -30,8 +30,12 @@ async function onSearch(event) {
 async function onLoadMore(event) {
     event.preventDefault();
 
-    const images = await imagesApiService.fetchImages();
-    return await renderImagesList(images);
+    try {
+        const images = await imagesApiService.fetchImages();
+        return await renderImagesList(images);
+    } catch (error) {
+        return Notiflix.Notify.info('We are sorry, but you have reached the end of search results.');
+    }
      
 };
 
@@ -76,7 +80,7 @@ function imagesOnSearch(data) {
             clearImagesContainer();
             onEmptyArray();            
             return;
-    };                  
+    };  
         renderImagesList(data);
         refs.loadMoreBtn.classList.remove('is-hiden');    
  };
