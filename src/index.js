@@ -42,16 +42,16 @@ function renderImagesList(images) {
   <img src="${webformatURL}" alt="${tags}" loading="lazy" />
   <div class="info">
     <p class="info-item">
-      ${likes}<b>Likes</b>
+      <b>Likes</b><span>${likes}</span>
     </p>
     <p class="info-item">
-      ${views}<b>Views</b>
+      <b>Views</b><span>${views}</span>
     </p>
     <p class="info-item">
-      ${comments}<b>Comments</b>
+      <b>Comments</b><span>${comments}</span>
     </p>
     <p class="info-item">
-      ${downloads}<b>Downloads</b>
+      <b>Downloads</b><span>${downloads}</span>
     </p>
   </div>
 </div>`;
@@ -76,7 +76,7 @@ function imagesOnSearch(data) {
             clearImagesContainer();
             onEmptyArray();            
             return;
-         };
+    };                  
         renderImagesList(data);
         refs.loadMoreBtn.classList.remove('is-hiden');    
  };

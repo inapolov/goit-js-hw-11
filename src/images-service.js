@@ -29,11 +29,15 @@ export default class ImagesApiService{
     }
 
     hitsOfImages(data) {
-        const totalPages = data.totalHits / this.perPage;
-                if (this.page > totalPages) {
-                    return Notiflix.Notify.info('We are sorry, but you have reached the end of search results.');                    
-                 };
+        
+                // const totalPages = data.totalHits / this.perPage;
+                // if (this.page > totalPages) {
+                //     return Notiflix.Notify.info('We are sorry, but you have reached the end of search results.');                    
+                // };
+        
                 this.page += 1;                
                 return data.hits;
     }
+
+  
 }
